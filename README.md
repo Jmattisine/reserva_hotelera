@@ -1,105 +1,75 @@
-# Proyecto 4: API de Reservas Hoteleras
 
-API REST construida con **Node.js** y **Express** para la gestión de reservas en hoteles. Este proyecto forma parte del módulo de desarrollo backend del bootcamp Fullstack.
+# Proyecto: Sistema de Reservas Hoteleras
 
-## Funcionalidades
+Este proyecto consiste en una API REST desarrollada con **Node.js** y **Express** para gestionar reservas de hotel. Incluye las operaciones CRUD y múltiples filtros de consulta. Además, ofrece interfaces web simples para crear y listar reservas.
 
-- Crear reservas
-- Consultar reservas (todas o por ID)
-- Actualizar y eliminar reservas
-- Filtrar reservas por:
-  - Hotel
-  - Rango de fechas
-  - Tipo de habitación
-  - Estado
-  - Número de huéspedes
-- Documentación con Swagger (OpenAPI 3.0)
-
-##  Tecnologías utilizadas
-
-- Node.js
-- Express
-- UUID
-- dotenv
-- Swagger (con archivo JSON)
-
-##  Estructura de carpetas
+## 🧱 Estructura del Proyecto
 
 ```
-reserva-hotelera/
-├── .env
-├── .gitignore
-├── README.md
-├── package.json
-├── server.js
+reserva_hotelera/
 ├── controllers/
 │   └── reservasController.js
 ├── routes/
-│   └── reservasRoutes.js
+│   └── reservas.js
 ├── data/
-│   └── reservasData.js
-├── swagger.json (opcional)
+│   └── reservas.json
+├── public/
+│   ├── reservar.html
+│   └── listar_reservas.html
+├── .env
+├── server.js
+├── package.json
+└── README.md
 ```
 
-##  Instalación y ejecución local
+## 🚀 Cómo ejecutar el proyecto
 
-1. Clona este repositorio:
+### 1. Clona el repositorio o descomprime el proyecto
 
 ```bash
-git clone https://github.com/tuusuario/reserva-hotelera.git
-cd reserva-hotelera
+git clone <URL-del-repo>
+cd reserva_hotelera
 ```
 
-2. Instala las dependencias:
+### 2. Instala las dependencias
 
 ```bash
 npm install
 ```
 
-3. Crea un archivo `.env` en la raíz con el siguiente contenido:
-
-```
-PORT=3000
-```
-
-4. Inicia el servidor:
+### 3. Inicia el servidor
 
 ```bash
 npm start
 ```
 
-5. Accede a la API:
+El servidor se ejecutará en el puerto definido en `.env` (por defecto 3000):
 
 ```
-http://localhost:3000/api/reservas
+http://localhost:3000
 ```
 
-##  Swagger (Documentación de la API)
+## 🌐 Endpoints principales
 
-Puedes visualizar la documentación con Swagger:
+| Método | Endpoint                    | Descripción                               |
+|--------|-----------------------------|-------------------------------------------|
+| POST   | /api/reservas               | Crear una nueva reserva                   |
+| GET    | /api/reservas               | Obtener todas las reservas                |
+| GET    | /api/reservas/:id           | Obtener una reserva específica            |
+| PUT    | /api/reservas/:id           | Actualizar una reserva                    |
+| DELETE | /api/reservas/:id           | Eliminar una reserva                      |
+| GET    | /api/reservas?hotel=...     | Filtrar por hotel                         |
+| GET    | /api/reservas?fecha_inicio=YYYY-MM-DD&fecha_fin=YYYY-MM-DD | Filtrar por fechas |
+| GET    | /api/reservas?tipo_habitacion=...     | Filtrar por tipo de habitación |
+| GET    | /api/reservas?estado=...    | Filtrar por estado de reserva             |
+| GET    | /api/reservas?num_huespedes=... | Filtrar por número de huéspedes        |
 
-1. Asegúrate de tener el archivo `swagger.json` en la raíz.
-2. Instala Swagger UI Express:
+## 🖥 Interfaces Web
 
-```bash
-npm install swagger-ui-express
-```
+- `http://localhost:3000/reservar.html`: formulario para crear reservas
+- `http://localhost:3000/listar_reservas.html`: lista de reservas registradas
 
-3. Agrega este bloque en `server.js`:
+## 📦 Notas
 
-```js
-const swaggerUi = require('swagger-ui-express');
-const fs = require('fs');
-const swaggerDocument = JSON.parse(fs.readFileSync('./swagger.json'));
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-```
+- La información se guarda localmente en `data/reservas.json`.
 
-4. Accede a la documentación en:
-
-```
-http://localhost:3000/api-docs
-```
-
-##  Licencia
-
-Este proyecto es parte del aprendizaje del módulo 4 del Bootcamp Fullstack 

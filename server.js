@@ -1,10 +1,12 @@
-require('dotenv').config();
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
-const reservasRoutes = require('./routes/reservasRoutes');
+const reservasRoutes = require("./routes/reservas");
 
 app.use(express.json());
-app.use('/api/reservas', reservasRoutes);
+app.use(express.static("public")); 
+
+app.use("/api/reservas", reservasRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
