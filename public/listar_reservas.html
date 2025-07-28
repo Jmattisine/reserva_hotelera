@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Listado de Reservas</title>
+</head>
+<body>
+  <h1>Reservas Registradas</h1>
+  <button onclick="cargarReservas()">Cargar reservas</button>
+  <ul id="lista"></ul>
+
+  <script>
+    async function cargarReservas() {
+      const response = await fetch("http://localhost:3000/api/reservas");
+      const reservas = await response.json();
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+
+      if (reservas.length === 0) {
+        lista.innerHTML = "<li>No hay reservas registradas.</li>";
+        return;
+      }
+
+      reservas.forEach(reserva => {
+        const item = document.createElement("li");
+        item.textContent = `${reserva.hotel} | ${reserva.fecha} | ${reserva.tipo_habitacion} | ${reserva.num_huespedes} huésped(es) | Estado: ${reserva.estado}`;
+        lista.appendChild(item);
+      });
+    }
+  </script>
+</body>
+</html>
